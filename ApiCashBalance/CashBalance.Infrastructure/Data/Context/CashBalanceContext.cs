@@ -1,4 +1,5 @@
 using CashBalance.Domain;
+using CashBalance.Domain.Domain;
 using CashBalance.Infrastructure.Data.Context.Mapping;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,6 +11,8 @@ namespace CashBalance.Infrastructure.Data.Context
 
 
         public DbSet<Cashier> Cashiers { get; set; }
+        public DbSet<Extract> Extracts { get; set; }
+        public DbSet<Cash> Cashes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

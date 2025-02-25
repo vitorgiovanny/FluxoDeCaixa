@@ -4,7 +4,7 @@ namespace CashBalance.Interfaces
 {
     public interface ICashierServices
     {
-        Task<Cashier> CreateCashier(string name);
+        Task<(Cashier, Guid)> CreateCashier(string name);
         Task<Cashier> GetCashier(Guid id);
         Task<IEnumerable<Cashier>> GetAllCashiers();
         Task<Cashier> UpdateCashier(Cashier cashier);

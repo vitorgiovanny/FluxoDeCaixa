@@ -15,7 +15,9 @@ namespace CashBalance.Application.Services
 
         public async Task CreateExtract(Extract extract)
         {
+            extract.Id = Guid.NewGuid();
             await _extractRepository.Add(extract);
+            await _extractRepository.Save();
         }
 
         public Task<Extract> GetExtract(Guid idCashier)

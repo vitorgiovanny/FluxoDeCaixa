@@ -1,5 +1,6 @@
 using CashBalance.Application.Dto;
 using CashBalance.Domain;
+using CashBalance.Domain.Domain;
 using CashBalance.Domain.Interfaces;
 using CashBalance.Interfaces;
 
@@ -8,13 +9,15 @@ namespace CashBalance.Application.Services
     public class CashierServices : ICashierServices
     {
         private readonly IRepository<Cashier> _cashierRepository;
+        private readonly IRepository<Cash> _repositoryCash;
 
-        public CashierServices(IRepository<Cashier> cashierRepository)
+        public CashierServices(IRepository<Cashier> cashierRepository, IRepository<Cash> repositoryCash)
         {
             _cashierRepository = cashierRepository;
+            _repositoryCash = repositoryCash;
         }
 
-        public async Task<Cashier> CreateCashier(string name)
+        public async Task<(Cashier, Guid)> CreateCashier(string name)
         {
             if(string.IsNullOrEmpty(name)) throw new ArgumentNullException("Name is required");
 
@@ -25,10 +28,13 @@ namespace CashBalance.Application.Services
                 CreatedAt = DateTime.UtcNow
             };
 
+            var cashManagement = new Cash() { Id = Guid.NewGuid(), IdCashed = cash.Id, AtRegister = DateTime.UtcNow };
+            
+            await CreaterCash(cashManagement);
             await _cashierRepository.Add(cash);
             await _cashierRepository.Save();
-
-            return cash;
+            
+            return (cash, cashManagement.Id);
         }
 
         public async Task<Cashier> GetCashier(Guid id)
@@ -68,6 +74,12 @@ namespace CashBalance.Application.Services
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        private async Task CreaterCash(Cash cash)
+        {
+            await _repositoryCash.Add(cash);
+            await _cashierRepository.Save();
         }
     }
 }
