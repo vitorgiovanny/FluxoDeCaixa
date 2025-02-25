@@ -20,9 +20,10 @@ namespace CashBalance.Application.Services
             await _extractRepository.Save();
         }
 
-        public Task<Extract> GetExtract(Guid idCashier)
+        public async Task<List<Extract>> GetExtract(Guid idCashier)
         {
-            throw new NotImplementedException();
+            var response = await _extractRepository.GetByFilter(x => x.IdCash == idCashier);
+            return response.ToList();
         }
     }
 }

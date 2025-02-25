@@ -5,6 +5,6 @@ namespace CashBalance.Interfaces
     public interface IExtractServices
     {
         Task CreateExtract(Extract extract);
-        Task<Extract> GetExtract(Guid idCashier);
+        List<Extract> GetExtract(Guid idCashier);
     }
 }
