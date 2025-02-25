@@ -8,10 +8,10 @@ using CashBalance.Infrastructure.Repository;
 using CashBalance.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -19,16 +19,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMq"));
 builder.Services.AddHostedService<RabbitMqConsumer>();
 
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fluxo de Caixa", Version = "v1" });
+
+});
 
 builder.Services.AddDbContext<CashBalanceContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
 builder.Services.AddScoped<ICashierServices, CashierServices>();
 builder.Services.AddScoped<IExtractServices, ExtractServices>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-//builder.Services.AddScoped<IRepository<Cashier>, Repository<Cashier>>();
 
 var app = builder.Build();
 
@@ -36,7 +38,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Minha API v1"));
 }
 
 app.UseHttpsRedirection();
@@ -45,4 +47,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run("http://localhost:7000");

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiCashBalance", "ApiCashBalance\ApiCashBalance.csproj", "{EC00C873-34EB-4864-991D-E04014F46DA6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiCashBalance", "ApiCashBalance\ApiCashBalance.csproj", "{EC00C873-34EB-4864-991D-E04014F46DA6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBalance.Application", "CashBalance.Application\CashBalance.Application.csproj", "{D8931A83-81D9-4F3A-B189-12109920BF6A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashBalance.Application", "CashBalance.Application\CashBalance.Application.csproj", "{D8931A83-81D9-4F3A-B189-12109920BF6A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBalance.Domain", "CashBalance.Domain\CashBalance.Domain.csproj", "{3A1291B9-3310-4064-825F-AC7F92CFE72F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashBalance.Domain", "CashBalance.Domain\CashBalance.Domain.csproj", "{3A1291B9-3310-4064-825F-AC7F92CFE72F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CashBalance.Infrastructure", "CashBalance.Infrastructure\CashBalance.Infrastructure.csproj", "{3F0A91A0-80AE-4CCC-80C7-D3D47E9CD0B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CashBalance.Infrastructure", "CashBalance.Infrastructure\CashBalance.Infrastructure.csproj", "{3F0A91A0-80AE-4CCC-80C7-D3D47E9CD0B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiBalance.Test", "ApiBalance.Test\ApiBalance.Test.csproj", "{2F37E62E-0105-4CE1-BD54-CCA3940E05C6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{3F0A91A0-80AE-4CCC-80C7-D3D47E9CD0B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3F0A91A0-80AE-4CCC-80C7-D3D47E9CD0B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3F0A91A0-80AE-4CCC-80C7-D3D47E9CD0B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F37E62E-0105-4CE1-BD54-CCA3940E05C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F37E62E-0105-4CE1-BD54-CCA3940E05C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F37E62E-0105-4CE1-BD54-CCA3940E05C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F37E62E-0105-4CE1-BD54-CCA3940E05C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

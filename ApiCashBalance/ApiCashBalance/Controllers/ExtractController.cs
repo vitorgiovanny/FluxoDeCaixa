@@ -1,17 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using CashBalance.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ApiCashBalance.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("cashbalance/[controller]")]
     public class ExtractController : ControllerBase
     {
-        public ExtractController() { }
+        private readonly IExtractServices _services;
 
-        [HttpGet(Name = "Extract")]
-        public async Task<IActionResult> GetExtract(Guid IdCashier)
+        public ExtractController(IExtractServices services) 
+        { 
+            _services = services;
+        }
+
+        /// <summary>
+        /// Buscar o Extrato completo da aplicação
+        /// </summary>
+        /// <param name="idCash"></param>
+        /// <returns></returns>
+        [HttpGet("Extract")]
+        public async Task<IActionResult> GetExtract([FromQuery] Guid idCash)
         {
-            return Ok();
+            return Ok(_services.GetExtract(idCash));
         }
     }
 }
