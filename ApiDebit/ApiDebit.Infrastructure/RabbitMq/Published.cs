@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ApiDebit.Infrastructure.RabbitMq
 {
-    internal class Published : IHostedService, IRabbitMqPublisher
+    public class Published : IHostedService, IRabbitMqPublisher
     {
         private readonly ConnectionFactory _factory;
 

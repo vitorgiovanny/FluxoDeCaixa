@@ -48,5 +48,18 @@
       "UpstreamPathTemplate": "/gateway/extract/getreport",
       "UpstreamHttpMethod": [ "GET" ]
     }
+    ,
+    {
+      "DownstreamPathTemplate": "/api/Cash/AddCredit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/Cash/AddCredit",
+      "UpstreamHttpMethod": [ "POST" ]
+    }
   ]
 }

@@ -1,11 +1,22 @@
-var builder = WebApplication.CreateBuilder(args);
+using ApiDebit.Application.Services;
+using ApiDebit.Domain.Interfaces;
+using ApiDebit.Domain.Model.Push;
+using ApiDebit.Infrastructure.Data.Context;
+using ApiDebit.Infrastructure.RabbitMq;
+using Microsoft.EntityFrameworkCore;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.Configure<RabbitMqSettings>(builder.Configuration.GetSection("RabbitMq"));
+builder.Services.AddDbContext<CashBalanceContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddHostedService<Published>();
+builder.Services.AddScoped<ICashServices, CashServices>();
+builder.Services.AddSingleton<IRabbitMqPublisher, Published>();
 
 var app = builder.Build();
 
@@ -22,4 +33,4 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.Run();
+app.Run("http://localhost:7002");

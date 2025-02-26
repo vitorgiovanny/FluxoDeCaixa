@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ApiDebit.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class DebitController : ControllerBase
     {
         private readonly ICashServices _services;
@@ -15,7 +15,7 @@ namespace ApiDebit.Controllers
             _services = services;
         }
 
-        [HttpPost]
+        [HttpPost("AddDebit")]
         public async Task<IActionResult> AddDebit([FromBody] BodyCreditView model)
         {
             await _services.AddCash(model.Amount, model.IdCashed);

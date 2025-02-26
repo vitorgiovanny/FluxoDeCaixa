@@ -24,7 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\ApiDebit.Application\ApiDebit.Application.csproj" />
     <ProjectReference Include="..\ApiDebit.Domain\ApiDebit.Domain.csproj" />
+    <ProjectReference Include="..\ApiDebit.Infrastructure\ApiDebit.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

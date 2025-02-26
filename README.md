@@ -165,6 +165,21 @@ Retorna o extrato financeiro de um **caixa**.
 **Descrição:**  
 Retorna um relatório financeiro detalhado de um **Caixa**.  
 
+#### Adicionar Credito no caixa
+**Endpoint:**  
+`POST /gateway/Cash/AddCredit`
+
+```bash
+{
+  "Amount": 100.50,
+  "IdCashed": "d3b07384-d113-4f3e-a875-fbfcf1ff89a6",
+  "IdCash": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+}
+```
+
+**Descrição:**  
+Retorna um relatório financeiro detalhado de um **Caixa**.  
+
 
 ## Futuras Melhorias
 
