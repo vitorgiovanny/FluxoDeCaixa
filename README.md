@@ -34,11 +34,21 @@ Seguindo a arquitetura de Microsserviços, separamos os serviços da seguinte fo
 ## Arquitetura do Projeto
 Seguindo arquitetura DDD, e pensando na escabilidade horizontal(scale-out) e na distribuição de carga para multiplos serviços foi usado o Microsserviços.
 
-### Arquitetura de DDD
+### DDD
 
 A nossa arquitetura segue os princípios do Domain-Driven Design (DDD) organizando a solução em diferentes contextos delimitados (Bounded Contexts). Cada API representa *um contexto específico*, garantindo separação de responsabilidades e independência entre os domínios.
 
-Lembrando 
+No DDD o ideal é que o repositório seja específico para cada agregado raiz, ou seja, Isso significa que repositórios **não devem ser genéricos em excesso**, mas **um repositório genérico pode ser útil internamente para evitar repetição de código**.
+
+No nosso projeto, o repositório genérico é suficiente para atender nossas necessidades no momento. Embora Cash só possa existir se o Cashier (comerciante) existir, isso torna o Cashier o Aggregate Root, enquanto Cash é uma entidade pertencente ao agregado de Cashier. Dessa forma, qualquer movimentação de saldo ocorre através do Cashier.
+
+Por outro lado, Extract é um Aggregate Root independente, pois, apesar de precisar do Cash para existir, ele é manipulado de forma autônoma. Quando ocorre uma transação de débito ou crédito, uma mensagem é enviada para a API CashBalance, que registra a transação no banco de dados, garantindo a independência do seu ciclo de vida.
+
+A abordagem de repositório genérico foi mantida para todas as entidades por enquanto, até que seja necessária uma melhoria futura para separar os repositórios conforme o crescimento da aplicação.
+
+**Confira no topico Futuras Melhorias** para verificar quais proximos passos.
+
+Diretorio 
 ```
 Api Fluxo de Caixa
 ├── ApiBalance.Test #Testes automatizados
@@ -88,3 +98,8 @@ Docker (caso precise rodar dependências como banco de dados)
 
 
 ## Futuras Melhorias
+
+*Aggregate Root*
+
+Atualmente, utilizamos um repositório genérico para atender nossas necessidades. No entanto, para alinhar melhor com os princípios do DDD, é necessário refatorar os repositórios considerando os Aggregate Roots. A correção envolve manter repositórios específicos apenas para Cashier e Extract, garantindo que entidades dependentes sejam manipuladas exclusivamente por seus agregados.
+
