@@ -1,27 +1,51 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/cashier",
+      "DownstreamPathTemplate": "/cashbalance/Cashier/Creater",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 7000
         }
       ],
-      "UpstreamPathTemplate": "/gateway/weather",
+      "UpstreamPathTemplate": "/gateway/cashier/creater",
+      "UpstreamHttpMethod": [ "POST" ]
+    },
+    {
+      "DownstreamPathTemplate": "/cashbalance/Cashier/GetAll",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7000
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/cashier/GetAll",
       "UpstreamHttpMethod": [ "GET" ]
     },
     {
-      "DownstreamPathTemplate": "/api/products",
+      "DownstreamPathTemplate": "/cashbalance/Extract/GetExtract",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5002
+          "Port": 7000
         }
       ],
-      "UpstreamPathTemplate": "/gateway/products",
+      "UpstreamPathTemplate": "/gateway/extract/getextract",
+      "UpstreamHttpMethod": [ "GET" ]
+    },
+    {
+      "DownstreamPathTemplate": "/cashbalance/Extract/GetReport",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 7000
+        }
+      ],
+      "UpstreamPathTemplate": "/gateway/extract/getreport",
       "UpstreamHttpMethod": [ "GET" ]
     }
   ]

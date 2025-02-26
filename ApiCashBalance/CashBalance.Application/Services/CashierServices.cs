@@ -31,10 +31,10 @@ namespace CashBalance.Application.Services
             };
 
             var cash = new Cash(amount: INITIAL_AMOUNT ,cashierId: cashManagement.Id) {  };
-            
-            await CreaterCash(cash);
+
             await _cashierRepository.Add(cashManagement);
             await _cashierRepository.Save();
+            await CreaterCash(cash);
             
             return (cashManagement, cash.Id);
         }

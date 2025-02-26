@@ -19,7 +19,7 @@ namespace ApiCashBalance.Controllers
         /// </summary>
         /// <param name="idCash"></param>
         /// <returns></returns>
-        [HttpGet("Extract")]
+        [HttpGet("GetExtract")]
         public async Task<IActionResult> GetExtract([FromQuery] Guid idCash)
         {
             return Ok(_services.GetExtract(idCash));

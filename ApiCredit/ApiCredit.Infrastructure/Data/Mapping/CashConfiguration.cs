@@ -13,7 +13,19 @@ namespace ApiCredit.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Cash> builder)
         {
+            builder.ToTable("Cash");
             builder.HasKey(x => x.Id);
+            builder.OwnsOne(c => c.Amount, money =>
+            {
+                money.Property(m => m.Value)
+                    .HasColumnName("Amount")
+                    .IsRequired();
+            });
+
+            builder.HasOne(c => c.Cashier)
+                .WithMany()
+                .HasForeignKey(c => c.CashierId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace ApiCredit.Infrastructure.Data.Context
     public class CashBalanceContext : DbContext
     {
         public DbSet<Cash> Cashes { get; set; }
+        public DbSet<Cashier> Cashiers { get; set; }
 
         public CashBalanceContext(DbContextOptions<CashBalanceContext> options) : base(options) { }
 
