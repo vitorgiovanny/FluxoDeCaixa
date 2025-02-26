@@ -15,7 +15,12 @@ public class CashController : ControllerBase
         _services = services;
     }
 
-    [HttpPost]
+    /// <summary>
+    /// Adicionar dinheiro na conta
+    /// </summary>
+    /// <param name="model"></param>
+    /// <returns></returns>
+    [HttpPost("AddCredit")]
     public async Task<IActionResult> AddCredit([FromBody] BodyCreditView model)
     {
         await _services.AddCash(model.Amount, model.IdCashed);

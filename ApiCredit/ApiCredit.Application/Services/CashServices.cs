@@ -22,12 +22,12 @@ namespace ApiCredit.Application.Services
             _rabbitMqPublisher = publish;
         }
 
-        public async Task AddCash(double amount, Guid idCashed)
+        public async Task AddCash(double amount, Guid idCashed, Guid idcash)
         {
             if (amount <= 0) throw new ArgumentException("Amount is zero, review.");
 
-            var cash = await GetCash(idCashed);
-            cash.Cashs += amount;
+            var cash = await GetCash(idCashed, idcash);
+            cash.Amount.Add(new Money(amount));
             
             if(cash.Id == Guid.Empty)
             {
@@ -50,10 +50,10 @@ namespace ApiCredit.Application.Services
         {
             var message = new Extract()
             {
-                IdCashier = cash.IdCashed,
-                Cash = cash.Cashs,
+                IdCashier = cash.CashierId,
+                Cash = cash.Amount.Value,
                 IdCash = cash.Id,
-                Description = $"Credit {cash.Cashs} in cash"
+                Description = $"Credit {cash.Amount.Value} in cash"
             };
 
             string jsonString = JsonSerializer.Serialize(message);
@@ -61,15 +61,13 @@ namespace ApiCredit.Application.Services
             await _rabbitMqPublisher.PublicarMensagem(BALANCE_CREDIT, jsonString);
         }
 
-        private async Task<Cash> GetCash(Guid idCashed)
+        private async Task<Cash> GetCash(Guid idCashed, Guid idCash)
         {
-            var cash = await _cashRepository.GetByFilter(x => x.IdCashed == idCashed);
+            var cash = await _cashRepository.GetByFilter(x => x.CashierId == idCashed && x.Id == idCash);
 
-            if (cash.Count == 0) return new Cash()
+            if (cash.Count == 0) return new Cash(0, idCashed)
             {
                 Id = Guid.Empty,
-                IdCashed = idCashed,
-                AtRegister = DateTime.UtcNow
             };
 
             return await Task.FromResult(cash.FirstOrDefault());
