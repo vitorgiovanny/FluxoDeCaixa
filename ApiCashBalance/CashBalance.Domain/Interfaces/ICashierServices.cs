@@ -1,4 +1,5 @@
 using CashBalance.Domain;
+using CashBalance.Domain.Entities;
 
 namespace CashBalance.Interfaces
 {

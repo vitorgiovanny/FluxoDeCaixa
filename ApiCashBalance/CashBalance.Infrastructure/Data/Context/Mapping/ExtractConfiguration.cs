@@ -1,4 +1,4 @@
-﻿using CashBalance.Domain.Domain;
+﻿using CashBalance.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using System;
@@ -14,6 +14,14 @@ namespace CashBalance.Infrastructure.Data.Context.Mapping
         public void Configure(EntityTypeBuilder<Extract> builder)
         {
             builder.HasKey(c => c.Id);
+
+            builder.HasOne(p => p.Cashier)
+                .WithMany(p => p.Extracts)
+                .HasForeignKey(p => p.IdCashier);
+
+            builder.HasOne(p => p.Cash)
+                .WithMany(p => p.Extracts)
+                .HasForeignKey(p => p.IdCash);
         }
     }
 }

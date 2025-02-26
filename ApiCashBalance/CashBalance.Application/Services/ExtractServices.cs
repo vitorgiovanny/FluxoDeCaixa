@@ -1,6 +1,8 @@
-using CashBalance.Domain.Domain;
+using CashBalance.Domain.Entities;
 using CashBalance.Domain.Interfaces;
+using CashBalance.Domain.Interfaces.Repository;
 using CashBalance.Interfaces;
+using System.Diagnostics.Metrics;
 
 namespace CashBalance.Application.Services
 {
@@ -24,6 +26,13 @@ namespace CashBalance.Application.Services
         {
             var response = await _extractRepository.GetByFilter(x => x.IdCash == idCashier);
             return response.ToList();
+        }
+
+        public async Task<double> GetReportPerDay(Guid idCash)
+        {
+            var filterTeste = await _extractRepository.GetAllAsync(); ;
+            var filter = await _extractRepository.GetByFilter(x => x.Register.Date == DateTime.UtcNow.Date);
+            return filter.Sum(x => x.Amount);
         }
     }
 }

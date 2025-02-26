@@ -1,7 +1,8 @@
 using CashBalance.Application.Dto;
 using CashBalance.Domain;
-using CashBalance.Domain.Domain;
+using CashBalance.Domain.Entities;
 using CashBalance.Domain.Interfaces;
+using CashBalance.Domain.Interfaces.Repository;
 using CashBalance.Interfaces;
 
 namespace CashBalance.Application.Services
@@ -10,6 +11,7 @@ namespace CashBalance.Application.Services
     {
         private readonly IRepository<Cashier> _cashierRepository;
         private readonly IRepository<Cash> _repositoryCash;
+        private readonly int INITIAL_AMOUNT = 0;
 
         public CashierServices(IRepository<Cashier> cashierRepository, IRepository<Cash> repositoryCash)
         {
@@ -21,20 +23,20 @@ namespace CashBalance.Application.Services
         {
             if(string.IsNullOrEmpty(name)) throw new ArgumentNullException("Name is required");
 
-            Cashier cash = new Cashier()
+            Cashier cashManagement = new Cashier()
             {
                 Id = Guid.NewGuid(),
                 Name = name,
                 CreatedAt = DateTime.UtcNow
             };
 
-            var cashManagement = new Cash() { Id = Guid.NewGuid(), IdCashed = cash.Id, AtRegister = DateTime.UtcNow };
+            var cash = new Cash(amount: INITIAL_AMOUNT ,cashierId: cashManagement.Id) {  };
             
-            await CreaterCash(cashManagement);
-            await _cashierRepository.Add(cash);
+            await CreaterCash(cash);
+            await _cashierRepository.Add(cashManagement);
             await _cashierRepository.Save();
             
-            return (cash, cashManagement.Id);
+            return (cashManagement, cash.Id);
         }
 
         public async Task<Cashier> GetCashier(Guid id)
@@ -45,9 +47,7 @@ namespace CashBalance.Application.Services
         }
 
         public async Task<IEnumerable<Cashier>> GetAllCashiers()
-        {
-            return await _cashierRepository.GetAllAsync();
-        }
+            => await _cashierRepository.GetAllAsync();
 
         public async Task<Cashier> UpdateCashier(Cashier cashier)
         {

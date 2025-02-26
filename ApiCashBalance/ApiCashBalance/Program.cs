@@ -1,9 +1,10 @@
 using CashBalance.Application.Services;
 using CashBalance.Domain;
 using CashBalance.Domain.Interfaces;
+using CashBalance.Domain.Interfaces.Repository;
 using CashBalance.Domain.RabbitMq;
-using CashBalance.Infrastructure.Data.Consumers;
 using CashBalance.Infrastructure.Data.Context;
+using CashBalance.Infrastructure.Data.Message;
 using CashBalance.Infrastructure.Repository;
 using CashBalance.Interfaces;
 using Microsoft.EntityFrameworkCore;

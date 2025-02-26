@@ -6,17 +6,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using CashBalance.Domain.RabbitMq;
 using Microsoft.Extensions.Options;
-using Microsoft.EntityFrameworkCore.Metadata;
-using System.Threading.Channels;
-using CashBalance.Domain.Domain;
 using CashBalance.Interfaces;
 using CashBalance.Domain.Model;
+using CashBalance.Domain.Entities;
 
-namespace CashBalance.Infrastructure.Data.Consumers
+namespace CashBalance.Infrastructure.Data.Message
 {
     public class RabbitMqConsumer : BackgroundService
     {
@@ -66,7 +63,7 @@ namespace CashBalance.Infrastructure.Data.Consumers
                             var response = JsonConvert.DeserializeObject<ExtractModelSubscribe>(message);
 
                             if (response != null) 
-                                await _services.CreateExtract(new Extract() { Cash = response.Cash, IdCash = response.IdCash, IdCashier = response.IdCashier, Description = response.Description, Register = DateTime.UtcNow });
+                                await _services.CreateExtract(new Extract() { Amount = response.Cash, IdCash = response.IdCash, IdCashier = response.IdCashier, Description = response.Description, Register = DateTime.UtcNow });
 
                             await _channel.BasicAckAsync(deliveryTag: ea.DeliveryTag, multiple: false);
                             await Task.Delay(Timeout.Infinite, stoppingToken); 

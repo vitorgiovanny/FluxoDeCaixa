@@ -1,4 +1,5 @@
 ﻿using CashBalance.Domain.Interfaces;
+using CashBalance.Domain.Interfaces.Repository;
 using CashBalance.Infrastructure.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using System;

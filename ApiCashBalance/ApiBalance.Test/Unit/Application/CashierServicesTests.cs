@@ -1,7 +1,8 @@
 using CashBalance.Application.Services;
 using CashBalance.Domain;
-using CashBalance.Domain.Domain;
+using CashBalance.Domain.Entities;
 using CashBalance.Domain.Interfaces;
+using CashBalance.Domain.Interfaces.Repository;
 using Moq;
 
 namespace ApiBalance.Test.Unit.Application

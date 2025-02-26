@@ -1,6 +1,5 @@
-using CashBalance.Domain.Domain;
 
-namespace CashBalance.Domain;
+namespace CashBalance.Domain.Entities;
 
 public class Cashier : Entity
 {
@@ -8,5 +7,6 @@ public class Cashier : Entity
     public DateTime CreatedAt { get; set; }
     public DateTime? DeletedAt { get; set; }
 
-
+    public ICollection<Extract> Extracts { get; set; }
+    
 }

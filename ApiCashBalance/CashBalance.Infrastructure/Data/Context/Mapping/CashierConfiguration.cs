@@ -1,4 +1,5 @@
 using CashBalance.Domain;
+using CashBalance.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CashBalance.Domain.Interfaces
+namespace CashBalance.Domain.Interfaces.Repository
 {
     public interface IRepository <T> where T : class
     {

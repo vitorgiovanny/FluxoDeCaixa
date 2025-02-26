@@ -24,5 +24,16 @@ namespace ApiCashBalance.Controllers
         {
             return Ok(_services.GetExtract(idCash));
         }
+
+        /// <summary>
+        /// Buscar relatorio completo da aplicação
+        /// </summary>
+        /// <param name="idCash"></param>
+        /// <returns></returns>
+        [HttpGet("Report")]
+        public async Task<IActionResult> GetReport([FromQuery] Guid idCash)
+        {
+            return Ok(_services.GetReportPerDay(idCash));
+        }
     }
 }

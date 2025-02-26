@@ -1,4 +1,5 @@
 using CashBalance.Domain;
+using CashBalance.Domain.Entities;
 using CashBalance.Interfaces;
 using CashBalance.ViewModel;
 using Microsoft.AspNetCore.Mvc;
