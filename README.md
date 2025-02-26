@@ -122,6 +122,48 @@ dotnet run
 cd {Nome da API}.Test
 dotnet test
 ```
+### 📌 API Gateway Endpoints
+
+#### Comerciante 
+**Endpoint:**  
+`POST /gateway/cashier/creater`  
+
+**Descrição:**  
+Cria um novo **comerciante**.  
+
+**Parametros**
+```bash
+querystring:cashierName
+```
+```bash
+?cashierName=nome
+```
+---
+
+#### Listar Todos os Comerciantes
+**Endpoint:**  
+`GET /gateway/cashier/GetAll`  
+
+**Descrição:**  
+Retorna todos os **comerciantes** cadastrados.  
+
+---
+
+#### Obter Extrato Geral
+**Endpoint:**  
+`GET /gateway/extract/getextract`  
+
+**Descrição:**  
+Retorna o extrato financeiro de um **caixa**.  
+
+---
+
+#### Obter Relatório Diario
+**Endpoint:**  
+`GET /gateway/extract/getreport`  
+
+**Descrição:**  
+Retorna um relatório financeiro detalhado de um **Caixa**.  
 
 
 ## Futuras Melhorias
