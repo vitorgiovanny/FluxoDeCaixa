@@ -7,10 +7,11 @@
 ## Indice
 
 - [Introdução](#Introducao)
-- [Fluxo da Solução](#fluxo-solucao)
+- [Fluxo da Solução](#fluxo-Solução)
 - [Fluxo de Negocio](#Fluxo-de-Negocio)
 - [Arquitetura do Projeto](#Arquitetura-do-Projeto)
 - [Instrução](#Instrucao)
+- [Futuras Melhorias](#Futuras-Melhorias)
 
 ## Introducao
 Essa aplicação representa o **core domain** do nosso sistema, concentrando a lógica mais valiosa e complexa do nosso negócio de fluxo de caixa diário. Cada comerciante terá um caixa individual para registrar entradas e saídas de dinheiro, garantindo um controle financeiro preciso. Além disso, a aplicação gerará relatórios diários detalhados, oferecendo uma visão clara e organizada das transações realizadas.
@@ -78,23 +79,49 @@ Api Debit
 Antes de rodar o projeto, certifique-se de ter instalado:
 
 ```.NET SDK 8.0```
-Docker (caso precise rodar dependências como banco de dados)
 
-### Rodando a Aplicação
+```Docker```
+
+## Rodando a Aplicação
+
+### 📌 Configuração do RabbitMQ  
+
+Utilizamos a imagem oficial do **RabbitMQ** com painel de gerenciamento integrado.  
+
+###  Baixar a imagem oficial do RabbitMQ  
+```bash
+docker pull rabbitmq:3-management
+```
+
+### Baixar a imagem oficial do RabbitMQ  
+```bash
+docker pull rabbitmq:3-management 
+```
+###  Subir um container RabbitMQ
+```bash 
+docker run --rm  -it -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+```
+
+### ⚙️ Configuração do .NET
+
 **Restaure as dependências**
-```dotnet restore```
+```bash
+dotnet restore
+```
 
-**Para rodar a API principal:**
+### Rodar as APIs
 
-```cd ApiCashBalance```
+```bash
+cd {Nome da API (CashBalance, ApiCredit, ApiDebit, ApiGateway)}
+dotnet run
+```
 
-```dotnet run```
+### Rodar os testes das Apis
 
-**Para rodar os testes:**
-
-```cd ApiBalance.Test```
-
-```dotnet test```
+```bash
+cd {Nome da API}.Test
+dotnet test
+```
 
 
 ## Futuras Melhorias
