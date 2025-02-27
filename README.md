@@ -115,6 +115,17 @@ docker run --rm  -it -p 15672:15672 -p 5672:5672 rabbitmq:3-management
     "DefaultConnection": "{SQL SERVER}"
   }
 ```
+Exemplo de connection string
+```bash
+Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword;
+```
+
+**Aplicar as migrações**
+Na camada/projeto Infrastructure do ApiCashBalance coloca esse comando:
+
+```bash
+update-database
+```
 **Restaure as dependências**
 ```bash
 dotnet restore
