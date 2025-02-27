@@ -7,11 +7,12 @@
 ## Indice
 
 - [Introdução](#Introducao)
-- [Fluxo da Solução](#fluxo-Solução)
+- [Fluxo da Solução](#fluxo-da-Solução)
 - [Fluxo de Negocio](#Fluxo-de-Negocio)
 - [Arquitetura do Projeto](#Arquitetura-do-Projeto)
 - [Instrução](#Instrucao)
 - [Futuras Melhorias](#Futuras-Melhorias)
+- [Swagger](#Swagger)
 
 ## Introducao
 Essa aplicação representa o **core domain** do nosso sistema, concentrando a lógica mais valiosa e complexa do nosso negócio de fluxo de caixa diário. Cada comerciante terá um caixa individual para registrar entradas e saídas de dinheiro, garantindo um controle financeiro preciso. Além disso, a aplicação gerará relatórios diários detalhados, oferecendo uma visão clara e organizada das transações realizadas.
@@ -48,6 +49,9 @@ Por outro lado, Extract é um Aggregate Root independente, pois, apesar de preci
 A abordagem de repositório genérico foi mantida para todas as entidades por enquanto, até que seja necessária uma melhoria futura para separar os repositórios conforme o crescimento da aplicação.
 
 **Confira no topico Futuras Melhorias** para verificar quais proximos passos.
+
+### Menssageria
+O tipo de Exchange utilizado no RabbitMQ foi o **Direct Exchange**, pois apenas o serviço APIBALANCE precisa escutar/receber as mensagens. Esse tipo de roteamento garante uma entrega direta e previsível, sem a necessidade de broadcast. Além disso, a routing key foi utilizada para indicar se a operação foi de crédito ou débito.
 
 Diretorio 
 ```
@@ -104,6 +108,13 @@ docker run --rm  -it -p 15672:15672 -p 5672:5672 rabbitmq:3-management
 
 ### ⚙️ Configuração do .NET
 
+**Appsettings Connection String, fazer isso nas APIS(API CREDIT, API DEBIT, APICASHBALANCE)**
+```bash
+ },
+  "ConnectionStrings": {
+    "DefaultConnection": ""
+  }
+```
 **Restaure as dependências**
 ```bash
 dotnet restore
@@ -169,6 +180,7 @@ Retorna um relatório financeiro detalhado de um **Caixa**.
 **Endpoint:**  
 `POST /gateway/Cash/AddCredit`
 
+**Parametros**
 ```bash
 {
   "Amount": 100.50,
@@ -187,3 +199,7 @@ Retorna um relatório financeiro detalhado de um **Caixa**.
 
 Atualmente, utilizamos um repositório genérico para atender nossas necessidades. No entanto, para alinhar melhor com os princípios do DDD, é necessário refatorar os repositórios considerando os Aggregate Roots. A correção envolve manter repositórios específicos apenas para Cashier e Extract, garantindo que entidades dependentes sejam manipuladas exclusivamente por seus agregados.
 
+## Swagger
+```
+localhost:5000/swagger
+```
