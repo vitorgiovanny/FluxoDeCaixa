@@ -16,6 +16,11 @@ namespace ApiDebit.Domain.Entities
 
         public Cash() { }
 
+        public Cash(Money amount)
+        {
+            Amount = amount;
+        }
+
         public Cash(double amount, Guid cashierId)
         {
             Id = Guid.NewGuid();

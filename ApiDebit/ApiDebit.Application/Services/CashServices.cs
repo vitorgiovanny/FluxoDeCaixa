@@ -28,6 +28,7 @@ namespace ApiDebit.Application.Services
 
             var cash = await GetCash(idCashed, idCash);
             cash.Amount.Subtract(amount);
+            ValidateMoney(cash.Amount.Value);
 
             if (cash.Id == Guid.Empty)
             {
@@ -41,6 +42,11 @@ namespace ApiDebit.Application.Services
 
             await _cashRepository.Save();
             await PublishedMessage(cash);
+        }
+
+        private void ValidateMoney(double amount)
+        {
+            if (amount <= 0) throw new ArgumentException("Number is zero");
         }
 
         private async Task UpdateCash(Cash cash)
@@ -65,7 +71,7 @@ namespace ApiDebit.Application.Services
         {
             var cash = await _cashRepository.GetByFilter(x => x.CashierId == idCashed && x.Id == idCash);
 
-            if (cash.Count == 0) return new Cash()
+            if (cash.Count == 0) return new Cash(new Domain.Value_Object.Money(0))
             {
                 Id = Guid.NewGuid()
             };

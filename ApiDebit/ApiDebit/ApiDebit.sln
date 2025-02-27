@@ -5,11 +5,13 @@ VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDebit", "ApiDebit.csproj", "{FFBA8B6B-FF8A-4BCB-A699-FB758D51BF7D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDebit.Infrastructure", "..\ApiDebit.Infrastructure\ApiDebit.Infrastructure.csproj", "{70E1F76A-A6C7-47C8-8422-94FA0942C213}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDebit.Infrastructure", "..\ApiDebit.Infrastructure\ApiDebit.Infrastructure.csproj", "{70E1F76A-A6C7-47C8-8422-94FA0942C213}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDebit.Application", "..\ApiDebit.Application\ApiDebit.Application.csproj", "{B422E90E-13A0-4ABD-97E5-A9AB9897DC7F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDebit.Application", "..\ApiDebit.Application\ApiDebit.Application.csproj", "{B422E90E-13A0-4ABD-97E5-A9AB9897DC7F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDebit.Domain", "..\ApiDebit.Domain\ApiDebit.Domain.csproj", "{D9332C57-833E-416E-A563-A0F6612C39A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiDebit.Domain", "..\ApiDebit.Domain\ApiDebit.Domain.csproj", "{D9332C57-833E-416E-A563-A0F6612C39A2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiDebit.Tests", "..\ApiDebit.Tests\ApiDebit.Tests.csproj", "{6C2F07CC-D07C-4BC4-8E6E-5294DDAFA21E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{D9332C57-833E-416E-A563-A0F6612C39A2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9332C57-833E-416E-A563-A0F6612C39A2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D9332C57-833E-416E-A563-A0F6612C39A2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6C2F07CC-D07C-4BC4-8E6E-5294DDAFA21E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6C2F07CC-D07C-4BC4-8E6E-5294DDAFA21E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6C2F07CC-D07C-4BC4-8E6E-5294DDAFA21E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6C2F07CC-D07C-4BC4-8E6E-5294DDAFA21E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
