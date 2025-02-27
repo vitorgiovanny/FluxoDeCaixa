@@ -19,10 +19,11 @@ namespace ApiCashBalance.Controllers
         /// </summary>
         /// <param name="idCash"></param>
         /// <returns></returns>
-        [HttpGet("GetExtract")]
+        [HttpGet("getextract")]
         public async Task<IActionResult> GetExtract([FromQuery] Guid idCash)
         {
-            return Ok(_services.GetExtract(idCash));
+            var response = await _services.GetExtract(idCash);
+            return Ok(response);
         }
 
         /// <summary>
@@ -30,10 +31,11 @@ namespace ApiCashBalance.Controllers
         /// </summary>
         /// <param name="idCash"></param>
         /// <returns></returns>
-        [HttpGet("Report")]
+        [HttpGet("report")]
         public async Task<IActionResult> GetReport([FromQuery] Guid idCash)
         {
-            return Ok(_services.GetReportPerDay(idCash));
+            var response = await _services.GetReportPerDay(idCash);
+            return Ok(new {Amount = response, Description = "Valor diario"});
         }
     }
 }

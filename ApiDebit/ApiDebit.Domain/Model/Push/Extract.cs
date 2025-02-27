@@ -11,5 +11,6 @@ namespace ApiDebit.Domain.Model.Push
         public double Cash { get; set; }
         public string Description { get; set; }
         public Guid IdCashier { get; set; }
+        public Guid IdCash { get; set; }
     }
 }

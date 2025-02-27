@@ -27,7 +27,7 @@ namespace ApiCredit.Application.Services
             if (amount <= 0) throw new ArgumentException("Amount is zero, review.");
 
             var cash = await GetCash(idCashed, idcash);
-            cash.Amount.Add(new Money(amount));
+            cash.Amount.Add(amount);
             
             if(cash.Id == Guid.Empty)
             {

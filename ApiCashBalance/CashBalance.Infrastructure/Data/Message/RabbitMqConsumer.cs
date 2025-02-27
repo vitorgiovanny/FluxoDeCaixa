@@ -22,7 +22,7 @@ namespace CashBalance.Infrastructure.Data.Message
         private readonly IServiceScopeFactory _servicesScopeFactory;
         private IConnection _connection;
         private IChannel _channel;
-        
+        private const string BALANCE_DEBIT = "balance_debit";
         public RabbitMqConsumer(IOptions<RabbitMqSettings> options, IServiceScopeFactory servicesScopeFactory)
         {
             _path = options.Value.HostName;
@@ -62,11 +62,16 @@ namespace CashBalance.Infrastructure.Data.Message
                             var message = Encoding.UTF8.GetString(body);
                             var response = JsonConvert.DeserializeObject<ExtractModelSubscribe>(message);
 
-                            if (response != null) 
+                            if (response != null)
+                            {
+                                if (_queue == BALANCE_DEBIT) response.Cash = response.Cash * (-1);
+
                                 await _services.CreateExtract(new Extract() { Amount = response.Cash, IdCash = response.IdCash, IdCashier = response.IdCashier, Description = response.Description, Register = DateTime.UtcNow });
+                            
+                            }
 
                             await _channel.BasicAckAsync(deliveryTag: ea.DeliveryTag, multiple: false);
-                            await Task.Delay(Timeout.Infinite, stoppingToken); 
+                            //await Task.Delay(Timeout.Infinite, stoppingToken); 
 
                         }
                         catch (Exception ex)
@@ -78,6 +83,7 @@ namespace CashBalance.Infrastructure.Data.Message
 
                 await _channel.BasicConsumeAsync(queue: _queue, autoAck: false, consumer: consumer);
             }
+	    await Task.Delay(Timeout.Infinite, stoppingToken); 
         }
 
         public override void Dispose()

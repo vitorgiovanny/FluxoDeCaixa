@@ -23,7 +23,7 @@ public class CashierController : ControllerBase
     /// <returns></returns>
     /// <response code="200">Comerciante criado com sucesso</response>
     /// <response code="400">Erro ao criar o comerciante</response>
-    [HttpPost("Creater")]
+    [HttpPost("creater")]
     [ProducesResponseType(typeof(CreatedCashManagement), 200)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> CreaterCashier([FromQuery] string  cashierName)
@@ -40,7 +40,7 @@ public class CashierController : ControllerBase
     /// <returns></returns>
     /// <response code="200">Efetuado o retorno de todos os comerciantes com sucesso</response>
     /// <response code="400">Erro ao retornar todos os comerciantes</response>
-    [HttpGet("GetAll")]
+    [HttpGet("getall")]
     [ProducesResponseType(typeof(IEnumerable<Cashier>),200)]
     [ProducesResponseType(400)]
     public async Task<IActionResult> GetAllMerchantCashier()

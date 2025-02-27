@@ -23,7 +23,7 @@ public class CashController : ControllerBase
     [HttpPost("AddCredit")]
     public async Task<IActionResult> AddCredit([FromBody] BodyCreditView model)
     {
-        await _services.AddCash(model.Amount, model.IdCashed);
-        return Ok();
+        await _services.AddCash(model.Amount, model.IdCashed, model.IdCash);
+        return Ok(new {Amount = model.Amount, description = $"adicionado o montante de {model.Amount}"});
     }
 }

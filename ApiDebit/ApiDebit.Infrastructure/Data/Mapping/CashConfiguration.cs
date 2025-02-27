@@ -13,7 +13,14 @@ namespace ApiDebit.Infrastructure.Data.Mapping
     {
         public void Configure(EntityTypeBuilder<Cash> builder)
         {
+            builder.ToTable("Cash");
             builder.HasKey(x => x.Id);
+            builder.OwnsOne(c => c.Amount, money =>
+            {
+                money.Property(m => m.Value)
+                    .HasColumnName("Amount")
+                    .IsRequired();
+            });
         }
 
     }

@@ -40,7 +40,14 @@ namespace CashBalance.Infrastructure.Repository
 
         public async Task<List<T>> GetAllAsync()
         {
-            return await _dbSet.ToListAsync();
+            try
+            {
+                return await _dbSet.ToListAsync();
+            }
+            catch (TaskCanceledException ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         public async Task<List<T>> GetByFilter(Expression<Func<T, bool>> filter)

@@ -30,9 +30,16 @@ namespace CashBalance.Application.Services
 
         public async Task<double> GetReportPerDay(Guid idCash)
         {
-            var filterTeste = await _extractRepository.GetAllAsync(); ;
-            var filter = await _extractRepository.GetByFilter(x => x.Register.Date == DateTime.UtcNow.Date);
-            return filter.Sum(x => x.Amount);
+            try
+            {
+                var filterTeste = await _extractRepository.GetAllAsync(); 
+                var filter = await _extractRepository.GetByFilter(x => x.Register.Date == DateTime.UtcNow.Date);
+                return filter.Sum(x => x.Amount);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

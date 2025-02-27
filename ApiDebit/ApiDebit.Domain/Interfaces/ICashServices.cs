@@ -8,6 +8,6 @@ namespace ApiDebit.Domain.Interfaces
 {
     public interface ICashServices
     {
-        Task AddCash(double amount, Guid idCashed);
+        Task AddCash(double amount, Guid idCashed, Guid idCash);
     }
 }

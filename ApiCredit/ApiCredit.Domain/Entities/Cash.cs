@@ -15,6 +15,8 @@ namespace ApiCredit.Domain.Entities
 
         public Cashier Cashier { get; private set; }
 
+        public Cash() { }
+
         public Cash(double amount, Guid cashierId)
         {
             Id = Guid.NewGuid();

@@ -18,7 +18,7 @@ namespace ApiDebit.Controllers
         [HttpPost("AddDebit")]
         public async Task<IActionResult> AddDebit([FromBody] BodyCreditView model)
         {
-            await _services.AddCash(model.Amount, model.IdCashed);
+            await _services.AddCash(model.Amount, model.IdCashed, model.IdCash);
             return Ok();
         }
     }

@@ -9,6 +9,6 @@ namespace ApiDebit.Domain.Model.Push
     public class RabbitMqSettings
     {
         public string HostName { get; set; } = "localhost";
-        public string QueueName { get; set; } = "Extracted";
+        public string QueueName { get; set; }
     }
 }
